@@ -10,9 +10,9 @@ $(function () {
     let selectedPizza = $('#select-pizza');
     let orderCost = $('#koszt-pizzy');
     let isPomidorowy = $('#czy-pomidorowy');
-    console.log(isPomidorowy.val());
     let isCzosnkowy = $('#czy-czosnkowy');
     let isRodo = $('#rodo-check');
+    let errorBox = $('#error-box');
 
     let priceTable = [
         {'id': '1', 'price': '18,00 PLN'},
@@ -32,77 +32,62 @@ $(function () {
     });
 
     $('#pizza-order').submit(function() {
-        event.preventDefault();
+        errorBox.empty();
+        let alertsArray = [];
 
-        let alertMessage = 'Brak wartości w następujących polach:';
-        let alertChecker = false;
-
-        if(firstName.val() === '') {
-            alertMessage += ' Imię,';
-            alertChecker = true;
+        if($.trim(firstName.val()) === '') {
+            alertsArray.push('Imię');
         };
     
-        if(lastName.val() === '') {
-            alertMessage += ' Nazwisko,';
-            alertChecker = true;
+        if($.trim(lastName.val()) === '') {
+            alertsArray.push('Nazwisko');
         };
     
-        if(streetName.val() === '') {
-            alertMessage += ' Ulica,';
-            alertChecker = true;
+        if($.trim(streetName.val()) === '') {
+            alertsArray.push('Ulica');
         };
 
-        if(homeNumber.val() === '') {
-            alertMessage += ' Numer domu/mieszkania,';
-            alertChecker = true;
+        if($.trim(homeNumber.val()) === '') {
+            alertsArray.push('Mieszkanie');
         };
 
-        if(cityName.val() === '') {
-            alertMessage += ' Miasto,';
-            alertChecker = true;
+        if($.trim(cityName.val()) === '') {
+            alertsArray.push('Miasto');
         };
 
-        if(postNumber.val() === '') {
-            alertMessage += ' Kod pocztowy,';
-            alertChecker = true;
+        if($.trim(postNumber.val()) === '') {
+            alertsArray.push('Kod pocztowy');
         };
 
         if(selectedPizza.val() === null) {
-            alertMessage += ' Zamówienie,';
-            alertChecker = true;
+            alertsArray.push('Pizza');
         };
 
-        if(isRodo.prop("checked") == false) {
-            alertMessage += ' Zgoda na przetwarzanie danych osobowych,';
-            alertChecker = true;
+        if(!isRodo.is(":checked")) {
+            alertsArray.push('Rodo');
         };
+
+        if (alertsArray.length > 0) {
+            alertsArray.forEach(e => {
+                errorBox.append(`<li>${e}</li>`);
+            });
+            event.preventDefault();
+            return false;
+        }
 
         let orderInfo = {
-            "imie": "",
-            "nazwisko": "",
-            "ulica": "",
-            "mieszkanie": "",
-            "miasto": "",
-            "kodpocztowy": "",
-            "pizza": "",
-            "pomidorowy": "",
-            "czosnkowy": "",
-            "rodo": "",
+            firstName: $.trim(firstName.val()),
+            lastName: $.trim(lastName.val()),
+            streetName: $.trim(streetName.val()),
+            homeNumber: $.trim(homeNumber.val()),
+            cityName: $.trim(cityName.val()),
+            postNumber: $.trim(postNumber.val()),
+            selectedPizza: $.trim(selectedPizza.val()),
+            sauce: {
+                isPomidorowy: isPomidorowy.is(':checked'),
+                isCzosnkowy: isPomidorowy.is(':checked')
+            }
         }
-        
-        if(alertChecker) {
-            alert(alertMessage);
-        } else {
-            orderInfo.imie = firstName.val();
-            orderInfo.nazwisko = lastName.val();
-            orderInfo.ulica = streetName.val();
-            orderInfo.mieszkanie = homeNumber.val();
-            orderInfo.miasto = cityName.val();
-            orderInfo.kodpocztowy = postNumber.val();
-            orderInfo.pizza = selectedPizza.val();
-            orderInfo.pomidorowy = isPomidorowy.val();
-            orderInfo.czosnkowy = isCzosnkowy.val();
-            console.log(orderInfo);
-        }
+        console.log(orderInfo);
     });
 });
