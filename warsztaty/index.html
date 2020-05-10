@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zamówienia Pizzy</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <form action="" id="pizza-order">
+        <fieldset>
+            <label for="first-name">Imię:</label>
+            <input type="text" name="first-name" id="first-name">
+
+            <label for="last-name">Nazwisko:</label>
+            <input type="text" name="last-name" id="last-name"><br>
+        </fieldset>
+
+        <fieldset>
+            <label for="street-number">Ulica:</label>
+            <input type="text" name="street-number" id="street-number">
+
+            <label for="home-number">Numer domu/mieszkania:</label>
+            <input type="tezt" name="home-number" id="home-number"><br>
+        </fieldset>
+        
+        <fieldset>
+            <label for="city-name">Miasto:</label>
+            <input type="text" name="city-name" id="city-name">
+            
+            <label for="post-number">Kod Pocztowy:</label>
+            <input type="text" name="post-number" id="post-number"><br>
+        </fieldset>
+
+        <fieldset>
+            <label for="select-pizza">Zamówienie:</label>
+            <select name="select-pizza" id="select-pizza" place>
+                <option value="0" disabled selected>-- Wybierz Pizzę --</option>
+                <option value="1">1. Margherita: 18,00zł</option>
+                <option value="2">2. Funghi: 20,00zł</option>
+                <option value="3">3. Vesuvio: 22,00zł</option>
+                <option value="4">4. Pepperoni: 24:00zł</option>
+                <option value="5">5. Pompei: 26,00zł</option>
+            </select>
+            <p>Koszt: <span id="koszt-pizzy">00,00 PLN</span></p>
+        </fieldset>
+
+        <fieldset>
+            <label for="czy-pomidorowy">Sos pomidorowy:</label>
+            <input type="checkbox" name="czy-pomidorowy" id="czy-pomidorowy">
+            <label for="czy-czosnkowy">Sos czosnkowy:</label>
+            <input type="checkbox" name="czy-czosnkowy" id="czy-czosnkowy"><br>
+        </fieldset>
+
+        <fieldset>
+            <label for="rodo-check">Zgadzam się na przetwarzanie moich danych osobowych:</label>
+            <input type="checkbox" name="rodo-check" id="rodo-check" value="checked"><br>
+        </fieldset>
+
+        <button type="submit">Zamów!</button>
+    </form>
+
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
